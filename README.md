@@ -1,0 +1,11 @@
+Project Overview This project implements an advanced Virtual Power Plant (VPP) optimization scheduling system, combining a supply-side and load-side game theory model with a Distributionally Robust Multi-Agent Reinforcement Learning (DROMARL) algorithm. Core Objective: To achieve collaborative optimization of power generation unit scheduling and demand-side response in a highly uncertain load demand and dynamic electricity price environment, ensuring supply-demand balance, minimizing costs, and improving system robustness. Main Innovations
+
+Supply-Load Game Model: Using MADDPG to train 12-period strategies for both the supply and load sides, generating a daily ahead high-price probability distribution. Enhanced Load Fluctuation Simulation: Load adjustment range increased to ±40%, incorporating realistic factors such as inertia, price elasticity, weather/random events. DROMARL Core Components: Probabilistic World Model (VRNN-based) Distributionally Robust Critic (Wasserstein-style gradient penalty) Inertia-Aware Load Actor (learning load inertia coefficients) Uncertainty-Aware Supply Actor
+
+Reward Function Optimization: Reward range adjusted to 0 ~ -3000, providing a more balanced penalty for power shortages/surpluses. Comprehensive Visualization and Analysis: 16 subplots including training curves, final scheduling curves, unit start/stop, demand response effects, etc., plus detailed tabular reports. Dependencies:
+
+Python 3.8+ PyTorch (2.0+ recommended, CUDA supported) NumPy=1.26.4 Matplotlib=3.9.2 SciPy=1.13.1
+
+Notes:
+
+The code is a complete single-file implementation with no external data dependencies. Due to strong randomness (uncertainty in requirements, exploration noise), the results may vary slightly with each run, but the overall trend remains stable. If you encounter insufficient memory/VRAM, you can reduce BATCH_SIZE or BUFFER_SIZE. There are some minor bugs in the code (e.g., real_samples.float() in gradient_penalty should be real_samples), which may cause errors during execution; it is recommended to fix them before running the code.
